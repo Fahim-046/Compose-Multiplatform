@@ -8,7 +8,6 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
@@ -17,8 +16,9 @@ import kotlinx.serialization.json.Json
 class ApiClient(
     private val baseUrl: String,
     private val apiKey: String?,
+    private val engine: HttpClientEngine
 ) {
-    fun create(engine: HttpClientEngine): HttpClient {
+    fun create(): HttpClient {
         return HttpClient(engine) {
             install(ContentNegotiation) {
                 json(
@@ -41,8 +41,8 @@ class ApiClient(
             }
             defaultRequest {
                 url(baseUrl)
-                apiKey?.let {
-                    header("Authorization", "Bearer $apiKey")
+                apiKey?.let { key ->
+                    url.parameters.append("api_key", key)
                 }
                 contentType(ContentType.Application.Json)
             }

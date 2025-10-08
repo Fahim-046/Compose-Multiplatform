@@ -1,5 +1,8 @@
 package org.fahimdev.cmpboilerplate.data.dataSource.remote.response
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Torrent(
     val audio_channels: String,
     val bit_depth: String,
