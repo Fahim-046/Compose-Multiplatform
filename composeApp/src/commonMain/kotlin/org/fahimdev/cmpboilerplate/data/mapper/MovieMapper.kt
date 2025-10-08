@@ -1,6 +1,5 @@
 package org.fahimdev.cmpboilerplate.data.mapper
 
-import org.fahimdev.cmpboilerplate.data.dataSource.remote.response.MovieApiResponse
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.response.MovieResponse
 import org.fahimdev.cmpboilerplate.domain.model.Movie
 
@@ -10,14 +9,14 @@ class MovieMapper{
             if(response == null) return null
 
             val year = try {
-                response.release_date.split("-")[0].toIntOrNull() ?: 2023
+                response.releaseDate.split("-")[0].toIntOrNull() ?: 2023
             } catch (e: Exception) {
                 2023
             }
 
-            val genres = mapGenreIdsToNames(response.genre_ids ?: emptyList())
+            val genres = mapGenreIdsToNames(response.genreIds ?: emptyList())
 
-            val coverImage = response.poster_path?.let {
+            val coverImage = response.posterPath?.let {
                 "https://image.tmdb.org/t/p/w500$it"
             } ?: ""
 
@@ -25,7 +24,7 @@ class MovieMapper{
                 id = response.id,
                 title = response.title,
                 year = year,
-                rating = response.vote_average,
+                rating = response.voteAverage,
                 runtime = 120,
                 genres = genres,
                 summary = response.overview,
