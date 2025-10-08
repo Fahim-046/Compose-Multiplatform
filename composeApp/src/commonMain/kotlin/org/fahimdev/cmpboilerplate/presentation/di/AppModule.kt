@@ -22,7 +22,7 @@ val appModule = module {
 
     single<MovieCategoryViewModel> {
         MovieCategoryViewModel(
-            movieRepository = get()
+            getMovieByCategoryUseCase = get()
         )
     }
 }
