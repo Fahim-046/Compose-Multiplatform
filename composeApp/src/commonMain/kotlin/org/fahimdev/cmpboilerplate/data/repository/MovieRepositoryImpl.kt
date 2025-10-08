@@ -42,9 +42,9 @@ class MovieRepositoryImpl(
         withContext(Dispatchers.IO) {
             try {
                 val response = when (category) {
-                    "popular" -> movieApiService.getPopularMovies(page)
-                    "upcoming" -> movieApiService.getUpcomingMovies(page)
-                    "trending" -> movieApiService.getTrendingMovies(page)
+                    "Popular" -> movieApiService.getPopularMovies(page)
+                    "Upcoming" -> movieApiService.getUpcomingMovies(page)
+                    "Trending" -> movieApiService.getTrendingMovies(page)
                     else -> throw IllegalArgumentException("Invalid category: $category")
                 }
                 response.results.map(MovieMapper::mapResponseToDomain)
