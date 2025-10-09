@@ -8,18 +8,37 @@ import org.fahimdev.cmpboilerplate.presentation.movie.category.MovieCategoryScre
 import org.fahimdev.cmpboilerplate.presentation.movie.category.MovieCategoryViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.details.MovieDetailsScreen
 import org.fahimdev.cmpboilerplate.presentation.movie.details.MovieDetailsViewModel
-import org.fahimdev.cmpboilerplate.presentation.movie.list.CategoryType
 import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListScreen
 import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.toName
+import org.fahimdev.cmpboilerplate.presentation.settings.SettingsScreen
+import org.fahimdev.cmpboilerplate.presentation.settings.SettingsViewModel
+import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTheme
+import org.fahimdev.cmpboilerplate.presentation.settings.components.Languages
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AppNavGraph(navController: NavHostController) {
+fun AppNavGraph(
+    navController: NavHostController,
+    onLanguageSelected: (Languages) -> Unit,
+    onAppearanceSelected: (AppearanceTheme) -> Unit
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.MovieList.route
+        startDestination = Screen.Settings.route
     ) {
+        composable(Screen.Settings.route) {
+            val viewModel: SettingsViewModel = koinViewModel()
+            SettingsScreen(
+                onLanguageSelected = {
+                    onLanguageSelected(it)
+                },
+                onAppearanceSelected = {
+                    onAppearanceSelected(it)
+                },
+                viewModel = viewModel
+            )
+        }
         composable(Screen.MovieList.route) {
             val viewModel: MovieListViewModel = koinViewModel()
             MovieListScreen(

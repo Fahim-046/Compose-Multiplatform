@@ -31,9 +31,20 @@ kotlin {
     sourceSets {
 
         val commonMain by getting
-        val iosMain by creating
+        val iosMain by creating {
+            dependsOn(commonMain)
+        }
 
-        iosMain.dependsOn(commonMain)
+        val iosX64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -61,7 +72,9 @@ kotlin {
             // Coil
             implementation(libs.coil.compose)
             implementation(libs.coil.network.okhttp)
-
+            // DataStore
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
         }
         iosMain.dependencies{
             implementation("io.ktor:ktor-client-darwin:2.3.12")

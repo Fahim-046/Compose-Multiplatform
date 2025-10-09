@@ -1,5 +1,6 @@
 package org.fahimdev.cmpboilerplate.data.di
 
+import org.fahimdev.cmpboilerplate.core.managers.DataStoreManager
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.apiClient.ApiClient
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.apiService.MovieApiService
 import org.fahimdev.cmpboilerplate.data.repository.MovieRepositoryImpl
@@ -26,6 +27,10 @@ val networkModule = module {
 
     single<MovieRepository> {
         MovieRepositoryImpl(get())
+    }
+
+    single<DataStoreManager> {
+        DataStoreManager(get())
     }
 
     factory { GetTrendingMovieListUseCase(get()) }

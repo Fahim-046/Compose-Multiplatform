@@ -1,5 +1,6 @@
 package org.fahimdev.cmpboilerplate.presentation.di
 
+import org.fahimdev.cmpboilerplate.data.di.dataStoreModule
 import org.fahimdev.cmpboilerplate.data.di.engineModule
 import org.fahimdev.cmpboilerplate.data.di.networkModule
 import org.koin.core.context.startKoin
@@ -11,7 +12,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         modules(
             appModule,
             networkModule,
-            engineModule
+            engineModule,
+            dataStoreModule
         )
     }
 }

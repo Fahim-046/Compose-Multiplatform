@@ -1,11 +1,11 @@
 package org.fahimdev.cmpboilerplate.data.di
 
-import io.ktor.client.engine.darwin.Darwin
+import org.fahimdev.cmpboilerplate.createDataStore
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val engineModule:Module = module {
+actual val dataStoreModule: Module = module{
     single {
-        Darwin.create()
+        createDataStore()
     }
 }
