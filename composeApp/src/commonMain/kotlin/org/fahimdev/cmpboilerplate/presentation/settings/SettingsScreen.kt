@@ -63,7 +63,6 @@ fun SettingsScreenSkeleton(
         topBar = {
             PrimaryTopBar(
                 title = "Settings",
-                description = "Manage your personal information"
             )
         }) {
         LazyColumn(

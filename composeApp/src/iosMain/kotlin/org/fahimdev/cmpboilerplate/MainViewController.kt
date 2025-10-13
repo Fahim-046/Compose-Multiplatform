@@ -1,12 +1,15 @@
 package org.fahimdev.cmpboilerplate
 
 import App
+import androidx.compose.foundation.ComposeFoundationFlags
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.window.ComposeUIViewController
 import org.fahimdev.cmpboilerplate.presentation.di.initKoin
-import platform.UIKit.*
+import platform.UIKit.UIApplication
 
-@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 fun MainViewController() = ComposeUIViewController {
+    ComposeFoundationFlags.isNonComposedClickableEnabled = false
     initKoin()
     App()
 }

@@ -14,8 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveIconButton
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTopAppBar
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAdaptiveApi::class)
 @Composable
 fun PrimaryTopBar(
     leadingIcon: ImageVector? = null,
@@ -47,8 +50,7 @@ fun PrimaryTopBar(
     )
 
     if (isCenterAligned) {
-        CenterAlignedTopAppBar(
-            colors = colors,
+        AdaptiveTopAppBar(
             title = {
                 Column {
                     Text(
@@ -89,8 +91,7 @@ fun PrimaryTopBar(
             }
         )
     } else {
-        TopAppBar(
-            colors = colors,
+        AdaptiveTopAppBar(
             title = {
                 Column {
                     Text(
@@ -111,7 +112,7 @@ fun PrimaryTopBar(
             },
             navigationIcon = {
                 leadingIcon?.let {
-                    IconButton(onClick = onLeadingIconClick) {
+                    AdaptiveIconButton(onClick = onLeadingIconClick) {
                         Icon(
                             imageVector = it,
                             contentDescription = "Navigate back"
@@ -121,7 +122,7 @@ fun PrimaryTopBar(
             },
             actions = {
                 trailingIcon?.let {
-                    IconButton(onClick = onTrailingIconClick) {
+                    AdaptiveIconButton(onClick = onTrailingIconClick) {
                         Icon(
                             imageVector = it,
                             contentDescription = "More options"

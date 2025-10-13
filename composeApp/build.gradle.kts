@@ -60,6 +60,9 @@ kotlin {
 
                 // Coil - Only in commonMain
                 implementation(libs.coil.compose)
+
+                // Cupertino Adaptive
+                implementation("io.github.alexzhirkevich:cupertino-adaptive:0.1.0-alpha04")
             }
         }
 

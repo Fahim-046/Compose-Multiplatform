@@ -6,6 +6,12 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTheme
+import io.github.alexzhirkevich.cupertino.adaptive.CupertinoThemeSpec
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
+import io.github.alexzhirkevich.cupertino.adaptive.MaterialThemeSpec
+import io.github.alexzhirkevich.cupertino.theme.CupertinoColors
+import io.github.alexzhirkevich.cupertino.theme.CupertinoTheme
 
 private val LightColorScheme = lightColorScheme(
     primary = LightPrimary,
@@ -77,10 +83,10 @@ data class ExtendedColorScheme(
     val onInfo: Color
 )
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun CMPBoilerplateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -95,8 +101,18 @@ fun CMPBoilerplateTheme(
         isDarkTheme = darkTheme
     )
 
-    MaterialTheme(
-        colorScheme = colorScheme,
+    AdaptiveTheme(
+        material = {
+            MaterialTheme(
+                colorScheme = colorScheme,
+                content = it
+            )
+        },
+        cupertino = {
+            CupertinoTheme(
+                content = it
+            )
+        },
         content = content
     )
 }
