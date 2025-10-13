@@ -16,7 +16,7 @@ val appModule = module {
         )
     }
 
-    single<MovieDetailsViewModel> {
+    factory<MovieDetailsViewModel> {
         MovieDetailsViewModel(
             getMovieDetailsUseCase = get()
         )

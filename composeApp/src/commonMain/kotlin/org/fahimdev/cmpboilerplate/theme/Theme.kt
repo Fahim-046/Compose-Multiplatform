@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val LightColorScheme = lightColorScheme(
     primary = LightPrimary,
@@ -68,23 +69,41 @@ private val DarkColorScheme = darkColorScheme(
 
 // Custom extended color scheme
 data class ExtendedColorScheme(
-    val success: androidx.compose.ui.graphics.Color,
-    val onSuccess: androidx.compose.ui.graphics.Color,
-    val warning: androidx.compose.ui.graphics.Color,
-    val onWarning: androidx.compose.ui.graphics.Color,
-    val info: androidx.compose.ui.graphics.Color,
-    val onInfo: androidx.compose.ui.graphics.Color
+    val success: Color,
+    val onSuccess: Color,
+    val warning: Color,
+    val onWarning: Color,
+    val info: Color,
+    val onInfo: Color
 )
 
 @Composable
 fun CMPBoilerplateTheme(
-    darkTheme: Boolean = false,
+    darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
+    val colorScheme = when {
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    SystemBarColors(
+        statusBarColor = if (darkTheme) colorScheme.surfaceContainer else colorScheme.background,
+        navigationBarColor = if (darkTheme) colorScheme.surfaceContainer else colorScheme.background,
+        isDarkTheme = darkTheme
+    )
+
     MaterialTheme(
-        colorScheme = if(darkTheme) DarkColorScheme else LightColorScheme,
+        colorScheme = colorScheme,
         content = content
     )
 }
+
+@Composable
+expect fun SystemBarColors(
+    statusBarColor: Color,
+    navigationBarColor: Color,
+    isDarkTheme: Boolean
+)

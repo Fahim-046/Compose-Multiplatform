@@ -1,5 +1,3 @@
-package org.fahimdev.cmpboilerplate.presentation.movie.list
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.HorizontalCarousel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.MovieGrid
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.MovieHeader
@@ -20,11 +19,15 @@ import org.fahimdev.cmpboilerplate.core.components.shimmer.ShimmerEffect
 import org.fahimdev.cmpboilerplate.core.components.topbar.PrimaryTopBar
 import org.fahimdev.cmpboilerplate.domain.model.Movie
 import org.fahimdev.cmpboilerplate.presentation.base.BaseScreen
+import org.fahimdev.cmpboilerplate.presentation.movie.list.CategoryType
+import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListViewModel
+import org.fahimdev.cmpboilerplate.presentation.movie.list.toName
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MovieListScreen(
     modifier: Modifier = Modifier,
+    navController: NavController,
     onViewAllClick: (CategoryType) -> Unit,
     onMovieClick: (Int) -> Unit,
     viewModel: MovieListViewModel = koinViewModel()
@@ -35,6 +38,7 @@ fun MovieListScreen(
         popularMovies = states.value.popularMovies,
         upcomingMovies = states.value.upcomingMovies,
         isLoading = states.value.isLoading,
+        navController = navController,
         onViewAllClick = {
             onViewAllClick(it)
         },
@@ -51,6 +55,7 @@ fun MovieListSkeleton(
     popularMovies: List<Movie?>,
     upcomingMovies: List<Movie?>,
     isLoading: Boolean,
+    navController: NavController,
     onViewAllClick: (CategoryType) -> Unit,
     onMovieClick: (Int) -> Unit
 ) {
@@ -58,6 +63,8 @@ fun MovieListSkeleton(
         title = "CinemaHub",
         showTopBar = true,
         showBackArrow = false,
+        showBottomNavigation = true,
+        navController = navController,
         topBar = {
             PrimaryTopBar(
                 title = "CinemaHub",

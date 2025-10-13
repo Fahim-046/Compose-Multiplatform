@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import org.fahimdev.cmpboilerplate.core.components.dialog.LoadingDialog
 import org.fahimdev.cmpboilerplate.core.components.navigation.BottomNavigationBar
 
@@ -19,6 +20,7 @@ import org.fahimdev.cmpboilerplate.core.components.navigation.BottomNavigationBa
 fun BaseScreen(
     title: String,
     viewModel: BaseViewModel = BaseViewModel(),
+    navController: NavController? = null,
     showTopBar: Boolean = true,
     showBackArrow: Boolean = true,
     topBar: @Composable () -> Unit = {
@@ -58,8 +60,8 @@ fun BaseScreen(
         topBar = { if (showTopBar) topBar() },
         bottomBar = {
             when {
-                showBottomNavigation -> {
-                    BottomNavigationBar()
+                showBottomNavigation && navController != null-> {
+                    BottomNavigationBar(navController = navController)
                 }
                 showBottomBar -> bottomBar()
             }
