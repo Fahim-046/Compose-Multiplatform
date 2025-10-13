@@ -25,6 +25,14 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+            mavenContent {
+                includeGroupAndSubgroups("org.jetbrains.compose")
+                includeGroupAndSubgroups("org.jetbrains.androidx")
+                includeGroupAndSubgroups("org.jetbrains.androidx.navigation")
+            }
+        }
     }
 }
 

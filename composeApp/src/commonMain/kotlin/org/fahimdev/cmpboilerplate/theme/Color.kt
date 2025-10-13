@@ -70,7 +70,7 @@ val DarkOutlineVariant = Color(0xFF2A2A2A)
 
 val DarkSurfaceContainer = Color(0xFF171717)
 val DarkSurfaceContainerHigh = Color(0xFF1F1F1F)
-val DarkSurfaceContainerHighest = Color(0xFF262626)
+val DarkSurfaceContainerHighest = Color(0xFF080808)
 
 // Extended Colors - Professional & Clean
 object ExtendedColors {

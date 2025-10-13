@@ -30,7 +30,39 @@ kotlin {
 
     sourceSets {
 
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+
+                // Navigation
+                implementation(libs.androidx.navigation.compose)
+
+                // Koin
+                api(libs.koin.core)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+
+                // Ktor
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.ktor.client.logging)
+
+                // DataStore
+                implementation(libs.datastore)
+                implementation(libs.datastore.preferences)
+
+                // Coil - Only in commonMain
+                implementation(libs.coil.compose)
+            }
+        }
+
         val iosMain by creating {
             dependsOn(commonMain)
         }
@@ -49,36 +81,22 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             api(libs.koin.android)
-            implementation("io.ktor:ktor-client-android:2.3.12")
-        }
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.materialIconsExtended)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.jetbrains.compose.navigation)
-            // Koin
-            api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            // Ktor
-            implementation("io.ktor:ktor-client-core:2.3.12")
-            implementation("io.ktor:ktor-client-content-negotiation:2.3.12")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
-            implementation("io.ktor:ktor-client-logging:2.3.12")
-            // Coil
-            implementation(libs.coil.compose)
+
+            // Ktor - Android
+            implementation("io.ktor:ktor-client-android:3.0.1")
+
+            // Coil - Android with OkHttp
             implementation(libs.coil.network.okhttp)
-            // DataStore
-            implementation(libs.datastore)
-            implementation(libs.datastore.preferences)
         }
-        iosMain.dependencies{
-            implementation("io.ktor:ktor-client-darwin:2.3.12")
+
+        iosMain.dependencies {
+            // Ktor - iOS
+            implementation("io.ktor:ktor-client-darwin:3.0.1")
+
+            // Coil - iOS with Ktor
+            implementation(libs.coil.network.ktor)
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
@@ -115,4 +133,3 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
-
