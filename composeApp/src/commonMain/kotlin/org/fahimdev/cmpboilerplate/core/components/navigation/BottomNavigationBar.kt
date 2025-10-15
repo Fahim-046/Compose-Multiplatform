@@ -16,12 +16,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import org.fahimdev.cmpboilerplate.presentation.navigation.Screen
+import kotlin.reflect.KClass
 
 data class BottomNavItem(
     val label: String,
     val icon: ImageVector,
     val selectedIcon: ImageVector,
-    val screen: Screen
+    val screen: Any,
+    val screenClass: KClass<*>
 )
 
 val bottomNavItems = listOf(
@@ -29,13 +31,15 @@ val bottomNavItems = listOf(
         label = "Home",
         icon = Icons.Outlined.Home,
         selectedIcon = Icons.Filled.Home,
-        screen = Screen.MovieList
+        screen = Screen.MovieList,
+        screenClass = Screen.MovieList::class
     ),
     BottomNavItem(
         label = "Settings",
         icon = Icons.Outlined.Settings,
         selectedIcon = Icons.Filled.Settings,
-        screen = Screen.Settings
+        screen = Screen.Settings,
+        screenClass = Screen.Settings::class
     )
 )
 
@@ -45,11 +49,11 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination
+    val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar(modifier = modifier) {
         bottomNavItems.forEach { item ->
-            val isSelected = item.screen == currentRoute
+            val isSelected = currentRoute?.startsWith(item.screenClass.qualifiedName ?: "") == true
 
             NavigationBarItem(
                 icon = {
