@@ -1,5 +1,6 @@
 package org.fahimdev.cmpboilerplate.data.di
 
+import org.fahimdev.cmpboilerplate.BuildKonfig
 import org.fahimdev.cmpboilerplate.core.managers.DataStoreManager
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.apiClient.ApiClient
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.apiService.MovieApiService
@@ -15,8 +16,8 @@ import org.koin.dsl.module
 val networkModule = module {
     single {
         ApiClient(
-            baseUrl = "https://api.themoviedb.org/3/",
-            apiKey = "db5d93ff881544f1df428a417958ce1c",
+            baseUrl = BuildKonfig.BASE_URL,
+            apiKey = BuildKonfig.API_KEY,
             engine = get()
         ).create()
     }

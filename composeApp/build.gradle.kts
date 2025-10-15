@@ -1,5 +1,8 @@
+import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +10,15 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.0"
+    id("com.codingfeline.buildkonfig")
+}
+
+// Load local.properties
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { load(it) }
+    }
 }
 
 kotlin {
@@ -130,6 +142,14 @@ android {
     }
 }
 
+buildkonfig {
+    packageName = "org.fahimdev.cmpboilerplate"
+
+    defaultConfigs {
+        buildConfigField(STRING, "BASE_URL", localProperties.getProperty("api.base.url", ""))
+        buildConfigField(STRING, "API_KEY", localProperties.getProperty("api.key", ""))
+    }
+}
 dependencies {
     debugImplementation(compose.uiTooling)
 }
