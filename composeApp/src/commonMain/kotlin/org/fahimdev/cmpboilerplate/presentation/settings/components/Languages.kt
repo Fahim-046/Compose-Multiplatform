@@ -20,3 +20,11 @@ fun Languages.getLanguageName(): String {
         Languages.NORWEGIAN -> "Norsk"
     }
 }
+
+fun Languages.getLanguageISO(): String {
+    return when (this) {
+        Languages.ENGLISH -> "en"
+        Languages.BANGLA -> "bn"
+        Languages.NORWEGIAN -> "no"
+    }
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CMP Boilerplate</string>
+    <string name="app_description">Oppdag de beste filmene</string>
+    <string name="trending_now_title">Trender nå</string>
+    <string name="popular_title">Populær</string>
+    <string name="top_rated_title">Høyest vurdert</string>
+    <string name="upcoming_title">Kommende</string>
+    <string name="view_all_button_label">Se alle</string>
+    <string name="home_tab_label">Hjem</string>
+    <string name="settings_tab_label">Innstillinger</string>
+</resources>

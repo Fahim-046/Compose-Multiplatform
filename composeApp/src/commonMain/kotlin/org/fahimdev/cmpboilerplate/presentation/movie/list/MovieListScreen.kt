@@ -10,6 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.app_description
+import cmpboilerplate.composeapp.generated.resources.app_name
+import cmpboilerplate.composeapp.generated.resources.popular_title
+import cmpboilerplate.composeapp.generated.resources.trending_now_title
+import cmpboilerplate.composeapp.generated.resources.upcoming_title
+import cmpboilerplate.composeapp.generated.resources.view_all_button_label
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.HorizontalCarousel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.MovieGrid
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.MovieHeader
@@ -22,6 +29,7 @@ import org.fahimdev.cmpboilerplate.presentation.base.BaseScreen
 import org.fahimdev.cmpboilerplate.presentation.movie.list.CategoryType
 import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.toName
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -33,7 +41,11 @@ fun MovieListScreen(
     viewModel: MovieListViewModel = koinViewModel()
 ) {
     val states = viewModel.states.collectAsStateWithLifecycle()
+    val appDescription = stringResource(Res.string.app_description)
+    val appName = stringResource(Res.string.app_name)
     MovieListSkeleton(
+        appDescription = appDescription,
+        appName = appName,
         trendingMovies = states.value.trendingMovies,
         popularMovies = states.value.popularMovies,
         upcomingMovies = states.value.upcomingMovies,
@@ -51,6 +63,8 @@ fun MovieListScreen(
 @Composable
 fun MovieListSkeleton(
     modifier: Modifier = Modifier,
+    appDescription: String,
+    appName: String,
     trendingMovies: List<Movie?>,
     popularMovies: List<Movie?>,
     upcomingMovies: List<Movie?>,
@@ -60,15 +74,14 @@ fun MovieListSkeleton(
     onMovieClick: (Int) -> Unit
 ) {
     BaseScreen(
-        title = "CinemaHub",
+        title = appName,
         showTopBar = true,
         showBackArrow = false,
         showBottomNavigation = true,
         navController = navController,
         topBar = {
             PrimaryTopBar(
-                title = "CinemaHub",
-                description = "Discover the best movies",
+                title = appName,
             )
         },
     ) {
@@ -104,7 +117,7 @@ fun MovieListSkeleton(
 
             if (trendingMovies.isNotEmpty()) {
                 item {
-                    MovieHeader(header = "Trending Now", actionText = "View All") {
+                    MovieHeader(header = stringResource(Res.string.trending_now_title), actionText = stringResource(Res.string.view_all_button_label)) {
                         onViewAllClick(CategoryType.Trending)
                     }
                 }
@@ -128,7 +141,7 @@ fun MovieListSkeleton(
 
             if (popularMovies.isNotEmpty()) {
                 item {
-                    MovieHeader(header = "Popular", actionText = "View All") {
+                    MovieHeader(header = stringResource(Res.string.popular_title), actionText = stringResource(Res.string.view_all_button_label)) {
                         onViewAllClick(CategoryType.Popular)
                     }
                 }
@@ -152,7 +165,7 @@ fun MovieListSkeleton(
 
             if (upcomingMovies.isNotEmpty()) {
                 item {
-                    MovieHeader(header = CategoryType.Upcoming.toName(), actionText = "View All") {
+                    MovieHeader(header = stringResource(Res.string.upcoming_title), actionText = stringResource(Res.string.view_all_button_label)) {
                         onViewAllClick(CategoryType.Upcoming)
                     }
                 }

@@ -32,7 +32,9 @@ fun AppNavGraph(
             val viewModel: SettingsViewModel = koinViewModel()
             SettingsScreen(
                 navController = navController,
-                onLanguageSelected = {},
+                onLanguageSelected = {
+                    onLanguageSelected(it)
+                },
                 onAppearanceSelected = {
                     onAppearanceSelected(it)
                 },
