@@ -19,6 +19,7 @@ import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTh
 import org.fahimdev.cmpboilerplate.presentation.settings.components.LanguageAndAppearance
 import org.fahimdev.cmpboilerplate.presentation.settings.components.Languages
 import org.fahimdev.cmpboilerplate.presentation.settings.components.ProfileInformation
+import org.fahimdev.cmpboilerplate.presentation.settings.components.getLanguageISO
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -28,7 +29,7 @@ fun SettingsScreen(
     onAppearanceSelected: (AppearanceTheme) -> Unit = {},
     viewModel: SettingsViewModel = koinViewModel()
 ) {
-    var selectedLanguage by remember { mutableStateOf(Languages.ENGLISH) }
+    val selectedLanguage by viewModel.languageISO.collectAsState()
     val selectedAppearance by viewModel.isDarkModeEnabled.collectAsState()
     SettingsScreenSkeleton(
         isDarkTheme = selectedAppearance == AppearanceTheme.DARK,
@@ -36,7 +37,8 @@ fun SettingsScreen(
         selectedAppearance = selectedAppearance,
         navController = navController,
         onLanguageSelected = {
-            selectedLanguage = it
+            viewModel.onLanguageSelected(it.getLanguageISO())
+            onLanguageSelected(it)
         },
         onAppearanceSelected = { theme ->
             onAppearanceSelected(theme)
@@ -48,7 +50,7 @@ fun SettingsScreen(
 fun SettingsScreenSkeleton(
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean,
-    selectedLanguage: Languages,
+    selectedLanguage: String?,
     selectedAppearance: AppearanceTheme,
     navController: NavController,
     onLanguageSelected: (Languages) -> Unit = {},
@@ -82,7 +84,12 @@ fun SettingsScreenSkeleton(
             item{
                 LanguageAndAppearance(
                     isDarkTheme = isDarkTheme,
-                    selectedLanguage = selectedLanguage,
+                    selectedLanguage = when(selectedLanguage){
+                        "en" -> Languages.ENGLISH
+                        "bn" -> Languages.BANGLA
+                        "no" -> Languages.NORWEGIAN
+                        else -> Languages.ENGLISH
+                    },
                     selectedAppearance = selectedAppearance,
                     onLanguageSelected = { language ->
                         onLanguageSelected(language)

@@ -28,7 +28,7 @@ fun HorizontalCarousel(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(350.dp)
+            .height(450.dp)
     ) {
         HorizontalPager(
             state = pageState,

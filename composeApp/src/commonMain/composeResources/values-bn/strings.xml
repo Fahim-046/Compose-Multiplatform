@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CMP Boilerplate</string>
+    <string name="app_description">সেরা সিনেমাগুলো আবিষ্কার করুন</string>
+    <string name="trending_now_title">বর্তমানে জনপ্রিয়</string>
+    <string name="popular_title">জনপ্রিয়</string>
+    <string name="top_rated_title">সর্বোচ্চ রেটিংপ্রাপ্ত</string>
+    <string name="upcoming_title">আসছে শীঘ্রই</string>
+    <string name="view_all_button_label">সব দেখুন</string>
+    <string name="home_tab_label">হোম</string>
+    <string name="settings_tab_label">সেটিংস</string>
+</resources>

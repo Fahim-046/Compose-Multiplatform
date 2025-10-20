@@ -10,8 +10,13 @@ import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTh
 class SettingsViewModel(private val dataStoreManager: DataStoreManager): BaseViewModel(){
     private val _isDarkModeEnabled = MutableStateFlow(AppearanceTheme.LIGHT)
     val isDarkModeEnabled = _isDarkModeEnabled
+
+    private val _languageISO = MutableStateFlow<String?>(null)
+    val languageISO = _languageISO
+
     init {
         isDarkModeEnable()
+        getInitialLanguage()
     }
 
     fun onThemeChanged(enabled: Boolean) = viewModelScope.launch{
@@ -26,5 +31,14 @@ class SettingsViewModel(private val dataStoreManager: DataStoreManager): BaseVie
         }else{
             _isDarkModeEnabled.value = AppearanceTheme.LIGHT
         }
+    }
+
+    private fun getInitialLanguage() = viewModelScope.launch {
+        _languageISO.value = dataStoreManager.getString("language")
+    }
+
+    fun onLanguageSelected(iso: String) = viewModelScope.launch {
+        _languageISO.value = iso
+        dataStoreManager.saveString("language", iso)
     }
 }
