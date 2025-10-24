@@ -5,21 +5,27 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.settings_screen_title
 import org.fahimdev.cmpboilerplate.core.components.topbar.PrimaryTopBar
 import org.fahimdev.cmpboilerplate.presentation.base.BaseScreen
 import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTheme
 import org.fahimdev.cmpboilerplate.presentation.settings.components.LanguageAndAppearance
 import org.fahimdev.cmpboilerplate.presentation.settings.components.Languages
 import org.fahimdev.cmpboilerplate.presentation.settings.components.ProfileInformation
+import org.fahimdev.cmpboilerplate.presentation.settings.components.getLanguageByISO
 import org.fahimdev.cmpboilerplate.presentation.settings.components.getLanguageISO
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -31,19 +37,29 @@ fun SettingsScreen(
 ) {
     val selectedLanguage by viewModel.languageISO.collectAsState()
     val selectedAppearance by viewModel.isDarkModeEnabled.collectAsState()
-    SettingsScreenSkeleton(
-        isDarkTheme = selectedAppearance == AppearanceTheme.DARK,
-        selectedLanguage = selectedLanguage,
-        selectedAppearance = selectedAppearance,
-        navController = navController,
-        onLanguageSelected = {
-            viewModel.onLanguageSelected(it.getLanguageISO())
-            onLanguageSelected(it)
-        },
-        onAppearanceSelected = { theme ->
-            onAppearanceSelected(theme)
-            viewModel.onThemeChanged(theme == AppearanceTheme.DARK)
-        })
+    var recompositionKey by remember { mutableStateOf(0) }
+
+    LaunchedEffect(selectedLanguage) {
+        selectedLanguage?.let { iso ->
+            onLanguageSelected(iso.getLanguageByISO())
+            recompositionKey++
+        }
+    }
+
+    key(selectedLanguage, recompositionKey) {
+        SettingsScreenSkeleton(
+            isDarkTheme = selectedAppearance == AppearanceTheme.DARK,
+            selectedLanguage = selectedLanguage,
+            selectedAppearance = selectedAppearance,
+            navController = navController,
+            onLanguageSelected = {
+                viewModel.onLanguageSelected(it.getLanguageISO())
+            },
+            onAppearanceSelected = { theme ->
+                onAppearanceSelected(theme)
+                viewModel.onThemeChanged(theme == AppearanceTheme.DARK)
+            })
+    }
 }
 
 @Composable
@@ -57,14 +73,14 @@ fun SettingsScreenSkeleton(
     onAppearanceSelected: (AppearanceTheme) -> Unit = {}
 ) {
     BaseScreen(
-        title = "Settings",
+        title = stringResource(Res.string.settings_screen_title),
         showTopBar = true,
         showBackArrow = false,
         showBottomNavigation = true,
         navController = navController,
         topBar = {
             PrimaryTopBar(
-                title = "Settings",
+                title = stringResource(Res.string.settings_screen_title),
                 description = "Manage your personal information"
             )
         }) {
@@ -75,21 +91,17 @@ fun SettingsScreenSkeleton(
             item {
                 Spacer(modifier = Modifier.height(8.dp))
             }
-            item{
+            item {
                 ProfileInformation()
             }
-            item{
+            item {
                 Spacer(modifier = Modifier.height(16.dp))
             }
-            item{
+            item {
                 LanguageAndAppearance(
                     isDarkTheme = isDarkTheme,
-                    selectedLanguage = when(selectedLanguage){
-                        "en" -> Languages.ENGLISH
-                        "bn" -> Languages.BANGLA
-                        "no" -> Languages.NORWEGIAN
-                        else -> Languages.ENGLISH
-                    },
+                    selectedLanguage = selectedLanguage?.getLanguageByISO()
+                        ?: Languages.ENGLISH,
                     selectedAppearance = selectedAppearance,
                     onLanguageSelected = { language ->
                         onLanguageSelected(language)

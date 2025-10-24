@@ -5,6 +5,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.response.MovieApiResponse
 import org.fahimdev.cmpboilerplate.data.dataSource.remote.response.MovieResponse
+import org.fahimdev.cmpboilerplate.data.dataSource.remote.response.TrailerApiResponse
 
 class MovieApiService(
     private val httpClient: HttpClient
@@ -35,5 +36,9 @@ class MovieApiService(
 
     suspend fun getMovieDetails(id: Int): MovieResponse {
         return httpClient.get("movie/$id").body()
+    }
+
+    suspend fun getMovieTrailer(id: Int): TrailerApiResponse{
+        return httpClient.get("movie/$id/videos").body()
     }
 }

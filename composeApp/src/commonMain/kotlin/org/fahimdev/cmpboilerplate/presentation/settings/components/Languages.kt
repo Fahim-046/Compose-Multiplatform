@@ -1,30 +1,48 @@
 package org.fahimdev.cmpboilerplate.presentation.settings.components
 
-enum class Languages {
-    ENGLISH,
-    BANGLA,
-    NORWEGIAN
-}
+import androidx.compose.runtime.Composable
 
-fun getLanguages(): List<Languages> =
-    listOf(
-        Languages.ENGLISH,
-        Languages.BANGLA,
-        Languages.NORWEGIAN
-    )
+enum class Languages(val iso: String, val nativeName: String, val englishName: String) {
+    ENGLISH("en", "English", "English"),
+    BANGLA("bn", "বাংলা", "Bengali"),
+    NORWEGIAN("no", "Norsk", "Norwegian");
 
-fun Languages.getLanguageName(): String {
-    return when (this) {
-        Languages.ENGLISH -> "English"
-        Languages.BANGLA -> "বাংলা"
-        Languages.NORWEGIAN -> "Norsk"
+    companion object {
+        fun getAvailableLanguages(): List<Languages> = entries
+
+        fun fromISO(iso: String?): Languages {
+            return entries.find { it.iso == iso } ?: ENGLISH
+        }
+
+        fun getSystemLanguage(): Languages {
+            // This would typically get the system locale, but for now return default
+            return ENGLISH
+        }
     }
 }
 
-fun Languages.getLanguageISO(): String {
+@Composable
+fun Languages.getDisplayName(): String {
+    return nativeName
+}
+
+fun Languages.getLanguageISO(): String = iso
+
+fun Languages.getLanguageName(): String = nativeName
+
+fun String?.getLanguageByISO(): Languages = Languages.fromISO(this)
+
+fun getLanguages(): List<Languages> = Languages.getAvailableLanguages()
+
+// Language validation helper
+fun isValidLanguageCode(code: String?): Boolean {
+    return Languages.entries.any { it.iso == code }
+}
+
+// Get language direction (useful for RTL languages)
+fun Languages.isRTL(): Boolean {
     return when (this) {
-        Languages.ENGLISH -> "en"
-        Languages.BANGLA -> "bn"
-        Languages.NORWEGIAN -> "no"
+        Languages.ENGLISH, Languages.BANGLA, Languages.NORWEGIAN -> false
+        // Add RTL languages here if needed
     }
 }

@@ -8,6 +8,7 @@ import org.fahimdev.cmpboilerplate.data.repository.MovieRepositoryImpl
 import org.fahimdev.cmpboilerplate.domain.repository.MovieRepository
 import org.fahimdev.cmpboilerplate.domain.usecase.GetMovieByCategoryUseCase
 import org.fahimdev.cmpboilerplate.domain.usecase.GetMovieDetailsUseCase
+import org.fahimdev.cmpboilerplate.domain.usecase.GetMovieTrailerURLUseCase
 import org.fahimdev.cmpboilerplate.domain.usecase.GetPopularMovieListUseCase
 import org.fahimdev.cmpboilerplate.domain.usecase.GetTrendingMovieListUseCase
 import org.fahimdev.cmpboilerplate.domain.usecase.GetUpcomingMovieListUseCase
@@ -39,4 +40,5 @@ val networkModule = module {
     factory { GetUpcomingMovieListUseCase(get()) }
     factory { GetMovieDetailsUseCase(get()) }
     factory { GetMovieByCategoryUseCase(get()) }
+    factory { GetMovieTrailerURLUseCase(get()) }
 }

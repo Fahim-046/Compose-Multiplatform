@@ -16,10 +16,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.fahimdev.cmpboilerplate.core.components.topbar.PrimaryTopBar
+import org.fahimdev.cmpboilerplate.core.enums.toLocalizedTitle
 import org.fahimdev.cmpboilerplate.domain.model.Movie
 import org.fahimdev.cmpboilerplate.presentation.base.BaseScreen
 import org.fahimdev.cmpboilerplate.presentation.movie.category.events.MovieCategoryEvents
-import org.fahimdev.cmpboilerplate.presentation.movie.list.CategoryType
 import org.fahimdev.cmpboilerplate.presentation.movie.list.components.MovieTile
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -50,9 +50,9 @@ fun MovieCategorySkeleton(
     movies: List<Movie?>,
     onNavigateBack: () -> Unit,
 ) {
-    BaseScreen(title = type, showTopBar = true, showBackArrow = true, topBar = {
+    BaseScreen(title = type.toLocalizedTitle(), showTopBar = true, showBackArrow = true, topBar = {
         PrimaryTopBar(
-            title = type,
+            title = type.toLocalizedTitle(),
             leadingIcon = Icons.AutoMirrored.Filled.ArrowBack,
             onLeadingIconClick = onNavigateBack,
         )

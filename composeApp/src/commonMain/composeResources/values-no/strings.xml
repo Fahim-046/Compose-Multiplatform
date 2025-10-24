@@ -8,4 +8,55 @@
     <string name="view_all_button_label">Se alle</string>
     <string name="home_tab_label">Hjem</string>
     <string name="settings_tab_label">Innstillinger</string>
+    <string name="splash_screen_title">Splash</string>
+    <string name="settings_screen_title">Innstillinger</string>
+    <string name="profile_information_title">Profilinformasjon</string>
+    <string name="profile_information_description">Oppdater din profilinformasjon og profilbilde</string>
+    <string name="change_avatar_button_label">Bytt avatar</string>
+    <string name="language_and_appearance_title">Språk og utseende</string>
+    <string name="language_and_appearance_description">Tilpass språk- og visuelle preferanser</string>
+    <string name="language_title">Språk</string>
+    <string name="appearance_title">Utseende</string>
+    <string name="theme_title">Tema</string>
+    <string name="light_label">Lys</string>
+    <string name="dark_label">Mørk</string>
+    <string name="watch_trailer_label">Se trailer</string>
+    <string name="download_label">Last ned</string>
+    <string name="synopsis_title">Sammendrag</string>
+    <string name="available_quality">Tilgjengelig kvalitet</string>
+
+    <!-- Common UI strings -->
+    <string name="loading">Laster...</string>
+    <string name="error">Feil</string>
+    <string name="retry">Prøv igjen</string>
+    <string name="cancel">Avbryt</string>
+    <string name="ok">OK</string>
+    <string name="save">Lagre</string>
+    <string name="back">Tilbake</string>
+    <string name="close">Lukk</string>
+    <string name="search">Søk</string>
+    <string name="no_results">Ingen resultater funnet</string>
+
+    <!-- Movie specific strings -->
+    <string name="movie_details">Filmdetaljer</string>
+    <string name="cast">Skuespillere</string>
+    <string name="director">Regissør</string>
+    <string name="genre">Sjanger</string>
+    <string name="duration">Varighet</string>
+    <string name="release_date">Utgivelsesdato</string>
+    <string name="rating">Vurdering</string>
+    <string name="my_watchlist">Min overvåkningsliste</string>
+    <string name="add_to_watchlist">Legg til i overvåkningsliste</string>
+    <string name="remove_from_watchlist">Fjern fra overvåkningsliste</string>
+
+    <!-- Error messages -->
+    <string name="network_error">Nettverkstilkoblingsfeil</string>
+    <string name="server_error">Serverfeil oppstod</string>
+    <string name="something_went_wrong">Noe gikk galt</string>
+
+    <!-- Accessibility -->
+    <string name="content_description_movie_poster">Filmplakat</string>
+    <string name="content_description_profile_picture">Profilbilde</string>
+    <string name="content_description_back_button">Gå tilbake</string>
+    <string name="content_description_settings_button">Åpne innstillinger</string>
 </resources>

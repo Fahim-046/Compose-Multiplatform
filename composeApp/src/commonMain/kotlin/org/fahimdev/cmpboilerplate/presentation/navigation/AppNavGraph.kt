@@ -12,6 +12,8 @@ import org.fahimdev.cmpboilerplate.presentation.movie.details.MovieDetailsScreen
 import org.fahimdev.cmpboilerplate.presentation.movie.details.MovieDetailsViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.toName
+import org.fahimdev.cmpboilerplate.presentation.movie.trailer.MovieTrailerScreen
+import org.fahimdev.cmpboilerplate.presentation.movie.trailer.MovieTrailerViewModel
 import org.fahimdev.cmpboilerplate.presentation.settings.SettingsScreen
 import org.fahimdev.cmpboilerplate.presentation.settings.SettingsViewModel
 import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTheme
@@ -63,6 +65,9 @@ fun AppNavGraph(
                 onBackArrowClick = {
                     navController.navigateUp()
                 },
+                onNavigateToTrailer = {
+                    navController.navigate(Screen.MovieTrailer(it))
+                },
                 viewModel = viewModel
             )
         }
@@ -75,6 +80,19 @@ fun AppNavGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
+                viewModel = viewModel
+            )
+        }
+
+        composable<Screen.MovieTrailer> {backStackEntry->
+            val viewModel: MovieTrailerViewModel = koinViewModel()
+            val id = backStackEntry.toRoute<Screen.MovieTrailer>().id
+            MovieTrailerScreen(
+                movieId = id,
+                onClose = {
+                    navController.navigateUp()
+                },
+                navController = navController,
                 viewModel = viewModel
             )
         }

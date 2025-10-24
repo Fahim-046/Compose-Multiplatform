@@ -10,12 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.synopsis_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SynopsisSection(description: String) {
     Column {
         Text(
-            text = "Synopsis",
+            text = stringResource(Res.string.synopsis_title),
             style = MaterialTheme.typography.titleLarge.copy(
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 24.sp,

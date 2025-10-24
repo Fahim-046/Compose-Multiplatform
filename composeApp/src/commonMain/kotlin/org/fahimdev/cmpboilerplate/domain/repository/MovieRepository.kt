@@ -11,4 +11,5 @@ interface MovieRepository {
     suspend fun getMovieById(id: Int): Movie
     suspend fun getMovieByPage(page: Int): List<Movie>
     suspend fun searchMovie(query: String): List<Movie>
+    suspend fun getMovieTrailerURL(id: Int): String?
 }

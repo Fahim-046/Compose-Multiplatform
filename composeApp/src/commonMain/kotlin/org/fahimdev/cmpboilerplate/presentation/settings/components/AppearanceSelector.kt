@@ -16,6 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.appearance_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppearanceSelector(
@@ -29,13 +32,13 @@ fun AppearanceSelector(
                 tint = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Theme", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(Res.string.appearance_title), style = MaterialTheme.typography.bodyMedium)
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(AppearanceTheme.LIGHT.getName(), style = MaterialTheme.typography.bodyMedium)
+            Text(AppearanceTheme.LIGHT.getLocalizedName(), style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier = Modifier.width(8.dp))
             Switch(
                 checked = isDarkTheme, onCheckedChange = {
@@ -54,7 +57,7 @@ fun AppearanceSelector(
                 )
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(AppearanceTheme.DARK.getName(), style = MaterialTheme.typography.bodyMedium)
+            Text(AppearanceTheme.DARK.getLocalizedName(), style = MaterialTheme.typography.bodyMedium)
         }
     }
 }

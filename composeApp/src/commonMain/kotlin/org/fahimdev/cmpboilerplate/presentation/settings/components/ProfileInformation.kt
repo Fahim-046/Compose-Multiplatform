@@ -22,6 +22,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.change_avatar_button_label
+import cmpboilerplate.composeapp.generated.resources.profile_information_description
+import cmpboilerplate.composeapp.generated.resources.profile_information_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ProfileInformation() {
@@ -46,12 +51,12 @@ fun ProfileInformation() {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    "Profile Information",
+                    stringResource(Res.string.profile_information_title),
                     style = MaterialTheme.typography.labelLarge.copy(fontSize = 24.sp)
                 )
             }
             Text(
-                "Update your personal information and profile picture",
+                stringResource(Res.string.profile_information_description),
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -75,7 +80,7 @@ fun ProfileInformation() {
                         maxLines = 1
                     )
                     Spacer(modifier = Modifier.size(4.dp))
-                    ActionButton(label = "Change Avatar", onPressed = {}, color = MaterialTheme.colorScheme.background)
+                    ActionButton(label = stringResource(Res.string.change_avatar_button_label), onPressed = {}, color = MaterialTheme.colorScheme.background)
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))

@@ -17,4 +17,7 @@ sealed interface Screen {
 
     @Serializable
     data class MovieCategory(val category: String) : Screen
+
+    @Serializable
+    data class MovieTrailer(val id: Int): Screen
 }

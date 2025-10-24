@@ -31,6 +31,7 @@ actual fun SystemBarColors(
         val insetsController = WindowCompat.getInsetsController(window, view)
 
         SideEffect {
+            window.setBackgroundDrawableResource(android.R.color.transparent)
             WindowCompat.setDecorFitsSystemWindows(window, false)
             insetsController.apply {
                 isAppearanceLightStatusBars = !isDarkTheme
@@ -38,7 +39,7 @@ actual fun SystemBarColors(
             }
         }
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().background(statusBarColor)) {
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()

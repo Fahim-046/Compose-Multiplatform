@@ -71,4 +71,10 @@ class MovieRepositoryImpl(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getMovieTrailerURL(id: Int): String? {
+        val response = movieApiService.getMovieTrailer(id)
+        println("Trailer key: ${response.results.firstOrNull()?.key}")
+        return response.results.firstOrNull()?.key
+    }
+
 }
