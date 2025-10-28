@@ -4,6 +4,7 @@ import org.fahimdev.cmpboilerplate.AppViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.category.MovieCategoryViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.details.MovieDetailsViewModel
 import org.fahimdev.cmpboilerplate.presentation.movie.list.MovieListViewModel
+import org.fahimdev.cmpboilerplate.presentation.movie.trailer.MovieTrailerViewModel
 import org.fahimdev.cmpboilerplate.presentation.settings.SettingsViewModel
 import org.koin.dsl.module
 
@@ -19,6 +20,12 @@ val appModule = module {
     factory<MovieDetailsViewModel> {
         MovieDetailsViewModel(
             getMovieDetailsUseCase = get()
+        )
+    }
+
+    factory<MovieTrailerViewModel> {
+        MovieTrailerViewModel(
+            movieTrailerURLUseCase = get()
         )
     }
 

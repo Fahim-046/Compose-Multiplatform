@@ -1,11 +1,62 @@
 <resources>
     <string name="app_name">CMP Boilerplate</string>
     <string name="app_description">সেরা সিনেমাগুলো আবিষ্কার করুন</string>
-    <string name="trending_now_title">বর্তমানে জনপ্রিয়</string>
+    <string name="trending_now_title">এখন জনপ্রিয়</string>
     <string name="popular_title">জনপ্রিয়</string>
-    <string name="top_rated_title">সর্বোচ্চ রেটিংপ্রাপ্ত</string>
-    <string name="upcoming_title">আসছে শীঘ্রই</string>
+    <string name="top_rated_title">সেরা রেটেড</string>
+    <string name="upcoming_title">আসন্ন</string>
     <string name="view_all_button_label">সব দেখুন</string>
     <string name="home_tab_label">হোম</string>
     <string name="settings_tab_label">সেটিংস</string>
+    <string name="splash_screen_title">স্প্ল্যাশ</string>
+    <string name="settings_screen_title">সেটিংস</string>
+    <string name="profile_information_title">প্রোফাইল তথ্য</string>
+    <string name="profile_information_description">আপনার প্রোফাইল তথ্য ও প্রোফাইল ছবি আপডেট করুন</string>
+    <string name="change_avatar_button_label">অবতার পরিবর্তন করুন</string>
+    <string name="language_and_appearance_title">ভাষা ও চেহারা</string>
+    <string name="language_and_appearance_description">আপনার ভাষা ও ভিজ্যুয়াল পছন্দ কাস্টমাইজ করুন</string>
+    <string name="language_title">ভাষা</string>
+    <string name="appearance_title">রূপ</string>
+    <string name="theme_title">থিম</string>
+    <string name="light_label">লাইট</string>
+    <string name="dark_label">ডার্ক</string>
+    <string name="watch_trailer_label">ট্রেলার দেখুন</string>
+    <string name="download_label">ডাউনলোড</string>
+    <string name="synopsis_title">সারসংক্ষেপ</string>
+    <string name="available_quality">উপলব্ধ মান</string>
+
+    <!-- Common UI strings -->
+    <string name="loading">লোড হচ্ছে...</string>
+    <string name="error">ত্রুটি</string>
+    <string name="retry">পুনরায় চেষ্টা</string>
+    <string name="cancel">বাতিল</string>
+    <string name="ok">ঠিক আছে</string>
+    <string name="save">সংরক্ষণ</string>
+    <string name="back">পিছনে</string>
+    <string name="close">বন্ধ</string>
+    <string name="search">অনুসন্ধান</string>
+    <string name="no_results">কোনো ফলাফল পাওয়া যায়নি</string>
+
+    <!-- Movie specific strings -->
+    <string name="movie_details">চলচ্চিত্রের বিবরণ</string>
+    <string name="cast">অভিনেতা</string>
+    <string name="director">পরিচালক</string>
+    <string name="genre">ধরন</string>
+    <string name="duration">সময়কাল</string>
+    <string name="release_date">মুক্তির তারিখ</string>
+    <string name="rating">রেটিং</string>
+    <string name="my_watchlist">আমার ওয়াচলিস্ট</string>
+    <string name="add_to_watchlist">ওয়াচলিস্টে যোগ করুন</string>
+    <string name="remove_from_watchlist">ওয়াচলিস্ট থেকে সরান</string>
+
+    <!-- Error messages -->
+    <string name="network_error">নেটওয়ার্ক সংযোগ ত্রুটি</string>
+    <string name="server_error">সার্ভার ত্রুটি ঘটেছে</string>
+    <string name="something_went_wrong">কিছু ভুল হয়েছে</string>
+
+    <!-- Accessibility -->
+    <string name="content_description_movie_poster">চলচ্চিত্রের পোস্টার</string>
+    <string name="content_description_profile_picture">প্রোফাইল ছবি</string>
+    <string name="content_description_back_button">ফিরে যান</string>
+    <string name="content_description_settings_button">সেটিংস খুলুন</string>
 </resources>

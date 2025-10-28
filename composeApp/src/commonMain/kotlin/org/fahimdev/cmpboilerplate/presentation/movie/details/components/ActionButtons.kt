@@ -22,17 +22,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.download_label
+import cmpboilerplate.composeapp.generated.resources.watch_trailer_label
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ActionButtons() {
+fun ActionButtons(onNavigateToTrailer: () -> Unit) {
     Column {
         Button(
-            onClick = { },
+            onClick = {
+                onNavigateToTrailer()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF5B5BD6)
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
             ),
             shape = RoundedCornerShape(16.dp)
         ) {
@@ -43,7 +50,7 @@ fun ActionButtons() {
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "Watch Trailer",
+                text = stringResource(Res.string.watch_trailer_label),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -71,7 +78,7 @@ fun ActionButtons() {
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "Download",
+                text = stringResource(Res.string.download_label),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 18.sp,

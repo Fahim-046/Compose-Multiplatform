@@ -35,6 +35,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MovieDetailsScreen(
     modifier: Modifier = Modifier,
     id: Int,
+    onNavigateToTrailer: (Int) -> Unit,
     onBackArrowClick: () -> Unit,
     viewModel: MovieDetailsViewModel = koinViewModel()
 ) {
@@ -45,7 +46,8 @@ fun MovieDetailsScreen(
     MovieDetailsScreenSkeleton(
         movie = states.movie,
         isLoading = states.isLoading,
-        onBackArrowClick = onBackArrowClick
+        onBackArrowClick = onBackArrowClick,
+        onNavigateToTrailer = onNavigateToTrailer
     )
 }
 
@@ -53,6 +55,7 @@ fun MovieDetailsScreen(
 fun MovieDetailsScreenSkeleton(
     movie: Movie?,
     isLoading: Boolean,
+    onNavigateToTrailer: (Int) -> Unit,
     onBackArrowClick: () -> Unit
 ) {
     BaseScreen(
@@ -80,7 +83,6 @@ fun MovieDetailsScreenSkeleton(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(vertical = 20.dp)
                     .verticalScroll(rememberScrollState())
             ) {
                 MoviePosterSection(moviePosterUrl = movie.coverImage, movieTitle = movie.title)
@@ -90,7 +92,9 @@ fun MovieDetailsScreenSkeleton(
                         .fillMaxWidth()
                         .padding(horizontal = 12.dp)
                 ) {
-                    ActionButtons()
+                    ActionButtons(onNavigateToTrailer = {
+                        onNavigateToTrailer(movie.id)
+                    })
                     Spacer(modifier = Modifier.height(24.dp))
                     MovieInfoRow(rating = movie.rating, duration = movie.runtime)
                     if (movie.genres.isNotEmpty()) {

@@ -1,6 +1,3 @@
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -8,13 +5,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.compose.rememberNavController
 import org.fahimdev.cmpboilerplate.AppViewModel
 import org.fahimdev.cmpboilerplate.localization.changeLanguage
 import org.fahimdev.cmpboilerplate.presentation.navigation.AppNavGraph
 import org.fahimdev.cmpboilerplate.presentation.settings.components.AppearanceTheme
+import org.fahimdev.cmpboilerplate.presentation.settings.components.Languages
 import org.fahimdev.cmpboilerplate.presentation.settings.components.getLanguageISO
 import org.fahimdev.cmpboilerplate.presentation.splash.SplashScreen
 import org.fahimdev.cmpboilerplate.theme.CMPBoilerplateTheme
@@ -31,6 +30,7 @@ fun App() {
     val isDarkTheme by viewModel.isDarkModeEnabled.collectAsState()
     val languageISO by viewModel.languageISO.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    var currentLanguage by remember { mutableStateOf(Languages.ENGLISH) }
 
     LaunchedEffect(languageISO) {
         changeLanguage(languageISO ?: "en")
@@ -45,6 +45,7 @@ fun App() {
                     AppNavGraph(
                         navController = navController,
                         onLanguageSelected = { language ->
+                            currentLanguage = language
                             viewModel.onLanguageChanged(language.getLanguageISO())
                         },
                         onAppearanceSelected = { theme ->

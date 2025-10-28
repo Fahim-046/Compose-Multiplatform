@@ -22,6 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.language_and_appearance_description
+import cmpboilerplate.composeapp.generated.resources.language_and_appearance_title
+import cmpboilerplate.composeapp.generated.resources.language_title
+import cmpboilerplate.composeapp.generated.resources.theme_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LanguageAndAppearance(
@@ -52,22 +58,22 @@ fun LanguageAndAppearance(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    "Language & Appearance",
+                    stringResource(Res.string.language_and_appearance_title),
                     style = MaterialTheme.typography.labelLarge.copy(fontSize = 24.sp)
                 )
             }
             Text(
-                "Customize your language and visual preferences",
+                stringResource(Res.string.language_and_appearance_description),
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text("Language", style = MaterialTheme.typography.bodyLarge)
+            Text(stringResource(Res.string.language_title), style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(8.dp))
             LanguageSelector(selectedLanguage = selectedLanguage, onLanguageSelected = {
                 onLanguageSelected(it)
             })
             Spacer(modifier = Modifier.height(16.dp))
-            Text("Appearance", style = MaterialTheme.typography.bodyLarge)
+            Text(stringResource(Res.string.theme_title), style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(8.dp))
             AppearanceSelector(isDarkTheme = isDarkTheme, appearance = selectedAppearance, onAppearanceSelected = {
                 onAppearanceSelected(it)

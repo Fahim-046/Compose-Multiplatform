@@ -12,12 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmpboilerplate.composeapp.generated.resources.Res
+import cmpboilerplate.composeapp.generated.resources.available_quality
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun QualitySection() {
     Column {
         Text(
-            text = "Available Quality",
+            text = stringResource(Res.string.available_quality),
             style = MaterialTheme.typography.titleLarge.copy(
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 24.sp,
