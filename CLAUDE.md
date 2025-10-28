@@ -72,3 +72,5 @@ Each platform has its own DI modules (e.g., `PlatformModule.android.kt`, `DataSt
 - Version catalog: `gradle/libs.versions.toml`
 - Main build file: `composeApp/build.gradle.kts`
 - Uses BuildKonfig plugin for managing secrets and configuration
+- Write unit test, ui test and integration test for each feature after implementation.
+- Generate file for every feature developed.
